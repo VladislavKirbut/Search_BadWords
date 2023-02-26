@@ -1,5 +1,8 @@
 package teachmeskills.vladkirbut.hw15.passportUtils;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 public class BlrPassport {
 
     private static final int NUMBER_OF_PASSPORT_LENGTH = 9;
@@ -10,13 +13,13 @@ public class BlrPassport {
     private final String dateOfBirth;
     private final String numberOfPassport;
     private final String identifierNumber;
-    private String dataOfIssue;
-    private String validityPeriod;
+    private final LocalDate dateOfIssue;
+    private final LocalDate validityPeriod;
 
-    BlrPassport (String surname, String name, Gender gender, String dateOfBirth, String numberOfPassport,
-                 String identifierNumber, String dataOfIssue, String validityPeriod) {
+    BlrPassport(String surname, String name, Gender gender, String dateOfBirth, String numberOfPassport,
+                String identifierNumber, LocalDate dateOfIssue, LocalDate validityPeriod) {
 
-        if(!isSurnameAndNameCorrect(surname, name))
+        if (!isSurnameAndNameCorrect(surname, name))
             throw new IllegalArgumentException("Enter correct name or surname.");
 
         if (!isPassportNumberCorrect(numberOfPassport))
@@ -25,12 +28,17 @@ public class BlrPassport {
         if (!isIdentifierNumberCorrect(identifierNumber))
             throw new IllegalArgumentException("Identifier number is incorrect.");
 
+        if (!isIssueDateLessThenValidityPeriod(dateOfIssue, validityPeriod))
+            throw new IllegalArgumentException("Enter correct date of issue or validity period.");
+
         this.surname = surname;
         this.name = name;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.numberOfPassport = numberOfPassport;
         this.identifierNumber = identifierNumber;
+        this.dateOfIssue = dateOfIssue;
+        this.validityPeriod = validityPeriod;
     }
 
     public static boolean isSurnameAndNameCorrect(String surname, String name) {
@@ -47,7 +55,7 @@ public class BlrPassport {
 
     public static boolean isPassportNumberCorrect(String numberOfPassport) {
 
-        if(numberOfPassport.length() != NUMBER_OF_PASSPORT_LENGTH)
+        if (numberOfPassport.length() != NUMBER_OF_PASSPORT_LENGTH)
             throw new IllegalArgumentException("The length of passport number is incorrect.");
 
         return numberOfPassport.matches("(AB|BM|HB|KH|MP|MC|KB|PP|SP|DP)(\\d{7})");
@@ -60,6 +68,9 @@ public class BlrPassport {
         return identifierNumber.matches("\\d{7}[ABCKEMH](\\d{3})(PB|BA|BI)\\d");
     }
 
+    public static boolean isIssueDateLessThenValidityPeriod(LocalDate dateOfIssue, LocalDate validityPeriod) {
+        return dateOfIssue.isBefore(validityPeriod);
+    }
 
     public static boolean isLatinCharacter(char letter) {
         return letter >= 'A' && letter <= 'z';
