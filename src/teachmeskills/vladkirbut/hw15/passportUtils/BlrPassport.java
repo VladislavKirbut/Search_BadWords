@@ -18,17 +18,7 @@ public class BlrPassport {
     BlrPassport (String surname, String name, Gender gender, LocalDate dateOfBirth, String numberOfPassport,
                 String identifierNumber, LocalDate dateOfIssue, LocalDate validityPeriod) {
 
-        if (!isSurnameAndNameCorrect(surname, name))
-            throw new IllegalArgumentException("Enter correct name or surname.");
-
-        if (!isPassportNumberCorrect(numberOfPassport))
-            throw new IllegalArgumentException("Number of passport is incorrect.");
-
-        if (!isIdentifierNumberCorrect(identifierNumber))
-            throw new IllegalArgumentException("Identifier number is incorrect.");
-
-        if (!isIssueDateLessThanValidityPeriod(dateOfIssue, validityPeriod))
-            throw new IllegalArgumentException("Enter correct date of issue or validity period.");
+        passportValidationCheck(surname, name, numberOfPassport, identifierNumber,dateOfIssue,validityPeriod);
 
         this.surname = surname;
         this.name = name;
@@ -40,11 +30,11 @@ public class BlrPassport {
         this.validityPeriod = validityPeriod;
     }
 
-    public static boolean isSurnameAndNameCorrect(String surname, String name) {
+    public boolean isSurnameAndNameCorrect(String surname, String name) {
         return surname.trim().matches("[A-z]+") && name.trim().matches("[A-z]+");
     }
 
-    public static boolean isPassportNumberCorrect(String numberOfPassport) {
+    public boolean isPassportNumberCorrect(String numberOfPassport) {
 
         if (numberOfPassport.length() != NUMBER_OF_PASSPORT_LENGTH)
             throw new IllegalArgumentException("The length of passport number is incorrect.");
@@ -52,14 +42,29 @@ public class BlrPassport {
         return numberOfPassport.matches("(AB|BM|HB|KH|MP|MC|KB|PP|SP|DP)(\\d{7})");
     }
 
-    public static boolean isIdentifierNumberCorrect(String identifierNumber) {
+    public boolean isIdentifierNumberCorrect(String identifierNumber) {
         if (identifierNumber.length() != IDENTIFIER_NUMBER_LENGTH)
             throw new IllegalArgumentException("The length of identifier number is incorrect.");
 
         return identifierNumber.matches("\\d{7}[ABCKEMH](\\d{3})(PB|BA|BI)\\d");
     }
 
-    public static boolean isIssueDateLessThanValidityPeriod(LocalDate dateOfIssue, LocalDate validityPeriod) {
+    public boolean isIssueDateLessThanValidityPeriod(LocalDate dateOfIssue, LocalDate validityPeriod) {
         return dateOfIssue.isBefore(validityPeriod);
+    }
+
+    public void passportValidationCheck(String surname, String name, String numberOfPassport, String identifierNumber,
+                                        LocalDate dateOfIssue, LocalDate validityPeriod) {
+        if (!isSurnameAndNameCorrect(surname, name))
+            throw new IllegalArgumentException("Enter correct name or surname.");
+
+        if (!isPassportNumberCorrect(numberOfPassport))
+            throw new IllegalArgumentException("Number of passport is incorrect.");
+
+        if (!isIdentifierNumberCorrect(identifierNumber))
+            throw new IllegalArgumentException("Identifier number is incorrect.");
+
+        if (!isIssueDateLessThanValidityPeriod(dateOfIssue, validityPeriod))
+            throw new IllegalArgumentException("Enter correct date of issue or validity period.");
     }
 }
