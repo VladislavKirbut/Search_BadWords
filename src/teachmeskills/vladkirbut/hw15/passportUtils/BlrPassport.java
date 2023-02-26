@@ -1,7 +1,6 @@
 package teachmeskills.vladkirbut.hw15.passportUtils;
 
 import java.time.LocalDate;
-import java.time.Month;
 
 public class BlrPassport {
 
@@ -10,13 +9,13 @@ public class BlrPassport {
     private final String surname;
     private final String name;
     private final Gender gender;
-    private final String dateOfBirth;
+    private final LocalDate dateOfBirth;
     private final String numberOfPassport;
     private final String identifierNumber;
     private final LocalDate dateOfIssue;
     private final LocalDate validityPeriod;
 
-    BlrPassport(String surname, String name, Gender gender, String dateOfBirth, String numberOfPassport,
+    BlrPassport (String surname, String name, Gender gender, LocalDate dateOfBirth, String numberOfPassport,
                 String identifierNumber, LocalDate dateOfIssue, LocalDate validityPeriod) {
 
         if (!isSurnameAndNameCorrect(surname, name))
@@ -28,7 +27,7 @@ public class BlrPassport {
         if (!isIdentifierNumberCorrect(identifierNumber))
             throw new IllegalArgumentException("Identifier number is incorrect.");
 
-        if (!isIssueDateLessThenValidityPeriod(dateOfIssue, validityPeriod))
+        if (!isIssueDateLessThanValidityPeriod(dateOfIssue, validityPeriod))
             throw new IllegalArgumentException("Enter correct date of issue or validity period.");
 
         this.surname = surname;
@@ -42,15 +41,7 @@ public class BlrPassport {
     }
 
     public static boolean isSurnameAndNameCorrect(String surname, String name) {
-        for (int i = 0; i < surname.length(); i++)
-            if (!isLatinCharacter(surname.charAt(i)))
-                return false;
-
-        for (int i = 0; i < name.length(); i++)
-            if (!isLatinCharacter(name.charAt(i)))
-                return false;
-
-        return true;
+        return surname.trim().matches("[A-z]+") && name.trim().matches("[A-z]+");
     }
 
     public static boolean isPassportNumberCorrect(String numberOfPassport) {
@@ -68,11 +59,7 @@ public class BlrPassport {
         return identifierNumber.matches("\\d{7}[ABCKEMH](\\d{3})(PB|BA|BI)\\d");
     }
 
-    public static boolean isIssueDateLessThenValidityPeriod(LocalDate dateOfIssue, LocalDate validityPeriod) {
+    public static boolean isIssueDateLessThanValidityPeriod(LocalDate dateOfIssue, LocalDate validityPeriod) {
         return dateOfIssue.isBefore(validityPeriod);
-    }
-
-    public static boolean isLatinCharacter(char letter) {
-        return letter >= 'A' && letter <= 'z';
     }
 }
