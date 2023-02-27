@@ -15,7 +15,7 @@ public class BlrPassport {
     private final LocalDate dateOfIssue;
     private final LocalDate validityPeriod;
 
-    BlrPassport (String surname, String name, Gender gender, LocalDate dateOfBirth, String numberOfPassport,
+    public BlrPassport (String surname, String name, Gender gender, LocalDate dateOfBirth, String numberOfPassport,
                 String identifierNumber, LocalDate dateOfIssue, LocalDate validityPeriod) {
 
         passportValidationCheck(surname, name, numberOfPassport, identifierNumber,dateOfIssue,validityPeriod);

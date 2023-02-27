@@ -1,4 +1,7 @@
-package teachmeskills.vladkirbut.hw15.passportUtils;
+package teachmeskills.vladkirbut.hw15;
+
+import teachmeskills.vladkirbut.hw15.passportUtils.BlrPassport;
+import teachmeskills.vladkirbut.hw15.passportUtils.Gender;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -10,11 +13,11 @@ public class PassportData {
 
         System.out.println("Enter passport data: ");
 
-        System.out.print("Enter name:");
-        String name = scanner.next();
-
         System.out.print("Enter surname: ");
         String surname = scanner.next();
+
+        System.out.print("Enter name: ");
+        String name = scanner.next();
 
         System.out.print("Enter your gender (MALE or FEMALE): ");
         Gender gender = Gender.valueOf(scanner.next());
