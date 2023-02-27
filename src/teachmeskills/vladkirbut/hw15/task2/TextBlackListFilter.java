@@ -18,7 +18,7 @@ public class TextBlackListFilter {
 
         for (int i = 0; i < badWords.length; i++) {
             boolean result;
-            Pattern pattern = Pattern.compile("(^|\\b)" + badWords[i] + "\\b",
+            Pattern pattern = Pattern.compile("\\b" + badWords[i] + "\\b",
                              Pattern.UNICODE_CHARACTER_CLASS | Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
             Matcher matcher = pattern.matcher(text);
             result = matcher.find();
@@ -32,14 +32,30 @@ public class TextBlackListFilter {
     public int getCountOfBadWords(String text) {
         if (text == null)
             throw new IllegalArgumentException("Error. Enter text");
+
         int count = 0;
         for (int i = 0; i < badWords.length; i++) {
-            Pattern pattern = Pattern.compile("(^|\\b)" + badWords[i] + "\\b",
+            Pattern pattern = Pattern.compile("\\b" + badWords[i] + "\\b",
                     Pattern.UNICODE_CHARACTER_CLASS | Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
             Matcher matcher = pattern.matcher(text);
             while(matcher.find())
                 count++;
         }
         return count;
+    }
+
+    public String replaceBadWords(String text) {
+        if (text == null)
+            throw new IllegalArgumentException("Error. Enter text");
+
+        for (int i = 0; i < badWords.length; i++) {
+
+            Pattern pattern = Pattern.compile("\\b" + badWords[i] + "\\b",
+                    Pattern.UNICODE_CHARACTER_CLASS | Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
+            Matcher matcher = pattern.matcher(text);
+            text = matcher.replaceAll("####");
+        }
+
+        return text;
     }
 }
