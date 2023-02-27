@@ -50,6 +50,9 @@ public class BlrPassport {
     }
 
     public boolean isIssueDateLessThanValidityPeriod(LocalDate dateOfIssue, LocalDate validityPeriod) {
+        if (dateOfIssue == null || validityPeriod == null)
+            throw new IllegalArgumentException("Enter correct date.");
+
         return dateOfIssue.isBefore(validityPeriod);
     }
 
@@ -72,5 +75,12 @@ public class BlrPassport {
         return "Surname: " + surname + "\nName: " + name + "\nGender: " + gender + "\nDateOfBirth: " + dateOfBirth +
                 "\nNumber of passport: " + numberOfPassport + "\nIdentifier number: " + identifierNumber +
                 "\nDate of issue: " + dateOfIssue + "\nValidity period: " + validityPeriod;
+    }
+
+    public boolean isExpired(LocalDate now) {
+        if (now == null)
+            throw new IllegalArgumentException("Enter correct date.");
+
+        return now.isAfter(validityPeriod);
     }
 }
