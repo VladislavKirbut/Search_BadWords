@@ -49,7 +49,6 @@ public class TextBlackListFilter {
             throw new IllegalArgumentException("Error. Enter text");
 
         for (int i = 0; i < badWords.length; i++) {
-
             Pattern pattern = Pattern.compile("\\b" + badWords[i] + "\\b",
                     Pattern.UNICODE_CHARACTER_CLASS | Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
             Matcher matcher = pattern.matcher(text);
