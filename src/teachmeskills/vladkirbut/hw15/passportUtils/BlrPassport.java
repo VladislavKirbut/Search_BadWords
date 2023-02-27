@@ -67,4 +67,10 @@ public class BlrPassport {
         if (!isIssueDateLessThanValidityPeriod(dateOfIssue, validityPeriod))
             throw new IllegalArgumentException("Enter correct date of issue or validity period.");
     }
+
+    public String toString() {
+        return "Surname: " + surname + "\nName: " + name + "\nGender: " + gender + "\nDateOfBirth: " + dateOfBirth +
+                "\nNumber of passport: " + numberOfPassport + "\nIdentifier number: " + identifierNumber +
+                "\nDate of issue: " + dateOfIssue + "\nValidity period: " + validityPeriod;
+    }
 }
