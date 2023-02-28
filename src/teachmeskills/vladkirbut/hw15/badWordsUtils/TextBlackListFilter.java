@@ -1,4 +1,4 @@
-package teachmeskills.vladkirbut.hw15.task2;
+package teachmeskills.vladkirbut.hw15.badWordsUtils;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
