@@ -27,10 +27,10 @@ public class Demonstration {
                     System.out.println("Enter passport data: ");
 
                     System.out.print("Enter surname: ");
-                    String surname = scanner.next();
+                    String surname = scanner.next().trim();
 
                     System.out.print("Enter name: ");
-                    String name = scanner.next();
+                    String name = scanner.next().trim();
 
                     System.out.print("Enter your gender (MALE or FEMALE): ");
                     Gender gender = Gender.valueOf(scanner.next());
@@ -60,7 +60,7 @@ public class Demonstration {
                 case 2 -> {
                     System.out.println("Enter bad words (through ','): ");
                     scanner.nextLine();
-                    String[] badWords = scanner.nextLine().split(",");
+                    String[] badWords = scanner.nextLine().split("\\s*,\\s*");
 
                     TextBlackListFilter blackList = new TextBlackListFilter(badWords);
 

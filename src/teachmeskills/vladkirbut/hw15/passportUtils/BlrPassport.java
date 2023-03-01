@@ -31,7 +31,7 @@ public class BlrPassport {
     }
 
     public boolean isSurnameAndNameCorrect(String surname, String name) {
-        return surname.trim().matches("[A-z]+") && name.trim().matches("[A-z]+");
+        return surname.matches("[A-z]+") && name.matches("[A-z]+");
     }
 
     public boolean isPassportNumberCorrect(String numberOfPassport) {

@@ -6,10 +6,18 @@ import java.util.regex.Pattern;
 
 public class TextBlackListFilter {
 
+    private static final String MASK = "####";
     private final String[] badWords;
+    private final Pattern[] pattern;
 
     public TextBlackListFilter(String... badWords) {
         this.badWords = Arrays.copyOf(badWords, badWords.length);
+        pattern = new Pattern[badWords.length];
+
+        for (int i = 0; i < pattern.length; i++) {
+            pattern[i] = Pattern.compile("\\b" + Pattern.quote(badWords[i]) + "\\b",
+                    Pattern.UNICODE_CHARACTER_CLASS | Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
+        }
     }
 
     public boolean hasBadWords(String text) {
@@ -18,8 +26,7 @@ public class TextBlackListFilter {
 
         for (int i = 0; i < badWords.length; i++) {
             boolean result;
-            Pattern pattern = Pattern.compile("\\b" + badWords[i] + "\\b",
-                             Pattern.UNICODE_CHARACTER_CLASS | Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
+            Pattern pattern = this.pattern[i];
             Matcher matcher = pattern.matcher(text);
             result = matcher.find();
 
@@ -35,10 +42,9 @@ public class TextBlackListFilter {
 
         int count = 0;
         for (int i = 0; i < badWords.length; i++) {
-            Pattern pattern = Pattern.compile("\\b" + badWords[i] + "\\b",
-                    Pattern.UNICODE_CHARACTER_CLASS | Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
+            Pattern pattern = this.pattern[i];
             Matcher matcher = pattern.matcher(text);
-            while(matcher.find())
+            while (matcher.find())
                 count++;
         }
         return count;
@@ -48,13 +54,13 @@ public class TextBlackListFilter {
         if (text == null)
             throw new IllegalArgumentException("Error. Enter text");
 
+        String replacedText = text;
         for (int i = 0; i < badWords.length; i++) {
-            Pattern pattern = Pattern.compile("\\b" + badWords[i] + "\\b",
-                    Pattern.UNICODE_CHARACTER_CLASS | Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
-            Matcher matcher = pattern.matcher(text);
-            text = matcher.replaceAll("####");
+            Pattern pattern = this.pattern[i];
+            Matcher matcher = pattern.matcher(replacedText);
+            replacedText = matcher.replaceAll(MASK);
         }
 
-        return text;
+        return replacedText;
     }
 }
