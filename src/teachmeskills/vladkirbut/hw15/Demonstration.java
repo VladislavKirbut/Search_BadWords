@@ -7,7 +7,6 @@ import teachmeskills.vladkirbut.hw15.badWordsUtils.TextBlackListFilter;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Demonstration {
