@@ -6,6 +6,8 @@ import teachmeskills.vladkirbut.hw15.badWordsUtils.TextBlackListFilter;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Demonstration {
@@ -35,7 +37,7 @@ public class Demonstration {
                     System.out.print("Enter your gender (MALE or FEMALE): ");
                     Gender gender = Gender.valueOf(scanner.next());
 
-                    System.out.println("Enter date of your birth: ");
+                    System.out.println("Enter date of your birth (dd.MM.yyyy format): ");
                     LocalDate dateOfBirth = getDateParameters();
 
                     System.out.print("Enter number of passport: ");
@@ -44,10 +46,10 @@ public class Demonstration {
                     System.out.print("Enter identifier number: ");
                     String identifierNumber = scanner.next();
 
-                    System.out.print("Enter date of issue passport: ");
+                    System.out.print("Enter date of issue passport (dd.MM.yyyy format): ");
                     LocalDate dateOfIssue = getDateParameters();
 
-                    System.out.println("Enter validity period of passport: ");
+                    System.out.println("Enter validity period of passport (dd.MM.yyyy format): ");
                     LocalDate validityPeriod = getDateParameters();
 
                     BlrPassport passport = new BlrPassport(surname, name, gender, dateOfBirth, numberOfPassport,
@@ -89,14 +91,6 @@ public class Demonstration {
     }
     public static LocalDate getDateParameters() {
         Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Enter day (1-31): ");
-        int day = scanner.nextInt();
-        System.out.print("Enter month (1-12): ");
-        int month = scanner.nextInt();
-        System.out.print("Enter year: ");
-        int year = scanner.nextInt();
-
-        return LocalDate.of(year, month, day);
+        return LocalDate.parse(scanner.nextLine().trim(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
 }
