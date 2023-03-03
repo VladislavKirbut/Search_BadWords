@@ -51,7 +51,7 @@ public class BlrPassport {
 
     public boolean isIssueDateLessThanValidityPeriod(LocalDate dateOfIssue, LocalDate validityPeriod) {
         if (dateOfIssue == null || validityPeriod == null)
-            throw new IllegalArgumentException("Enter correct date.");
+            throw new IllegalArgumentException("LocalDate parameter is null");
 
         return dateOfIssue.isBefore(validityPeriod);
     }

@@ -71,7 +71,7 @@ public class Demonstration {
                     boolean result = blackList.hasBadWords(text);
                     System.out.println("Does the text have bad words? - " + result);
 
-                    System.out.println("2.getCountOfBadWords method.");
+                    System.out.println("2.getCountOfBadWords method");
                     System.out.println("Enter text: ");
                     text = scanner.nextLine();
                     int count = blackList.getCountOfBadWords(text);
