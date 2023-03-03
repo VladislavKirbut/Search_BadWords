@@ -16,8 +16,8 @@ public class Demonstration {
         while (true) {
             System.out.print("""
                     Choose:
-                    1.Passport data
-                    2.TextBlankListFilter
+                    1.Passport data (task)
+                    2.TextBlankListFilter (task)
                     0.Exit
                     """);
 
@@ -25,7 +25,7 @@ public class Demonstration {
 
             switch (choice) {
                 case 1 -> {
-                    System.out.println("Enter passport data: ");
+                    System.out.println("Enter passport data.");
 
                     System.out.print("Enter surname: ");
                     String surname = scanner.next().trim();
@@ -52,7 +52,7 @@ public class Demonstration {
                     LocalDate validityPeriod = getDateParameters();
 
                     BlrPassport passport = new BlrPassport(surname, name, gender, dateOfBirth, numberOfPassport,
-                                           identifierNumber, dateOfIssue, validityPeriod);
+                            identifierNumber, dateOfIssue, validityPeriod);
 
                     System.out.println(passport);
                     boolean result = passport.isExpired(LocalDate.now(ZoneId.of("Europe/Minsk")));
@@ -88,6 +88,7 @@ public class Demonstration {
             }
         }
     }
+
     public static LocalDate getDateParameters() {
         Scanner scanner = new Scanner(System.in);
         return LocalDate.parse(scanner.nextLine().trim(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
