@@ -1,4 +1,4 @@
-1️⃣ 🟢
+ 🟢
 – Create a BlrPassport class, describing the data of the Belarusian passport.
 – The last name in Latin, first name in Latin, gender, date of birth, passport number, identification number, date of issue, expiration date (date) are stored in the class
 – Perform data validation inside the constructor. Fall with an error if the data is invalid
@@ -8,7 +8,7 @@
 – Declare a toString method that returns a string representation of data in a free format
 – Declare the boolean isExpired(LocalDate now) method, which checks whether the passport is expired. On the calling side, we pass the argument LocalDate.now(ZoneId.of("Europe/Minsk"))
 
-2️⃣ 🟡
+ 🟡
 – Create a TextBlackListFilter class.
 – The class constructor must accept an array of strings – a set of unacceptable words and expressions.
 – Declare a method that accepts some text (let's say a user comment) and returns whether it contains unacceptable words
